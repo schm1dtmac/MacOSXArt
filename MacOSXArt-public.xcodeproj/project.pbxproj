@@ -1,0 +1,293 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 63;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		37052FD03036327000A9C2D4 /* MacOSXArt.bundle in CopyFiles */ = {isa = PBXBuildFile; fileRef = 3705DC4A3033B7470076AC1F /* MacOSXArt.bundle */; };
+		37B2E05C2F4274D600832C6D /* ZKSwizzle.h in Headers */ = {isa = PBXBuildFile; fileRef = 37B2E0572F4274D600832C6D /* ZKSwizzle.h */; };
+		37B2E05D2F4274D600832C6D /* ZKSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 37B2E0582F4274D600832C6D /* ZKSwizzle.m */; };
+		37B2E05E2F4274D600832C6D /* MacOSXArt.m in Sources */ = {isa = PBXBuildFile; fileRef = 37B2E05A2F4274D600832C6D /* MacOSXArt.m */; };
+		37CCDB5B30674AA900CF53A9 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 37F1DE602F5B9C010007D5F1 /* libc++.tbd */; };
+		37DF895C305369CD00E054F7 /* MacOSXArt.h in Sources */ = {isa = PBXBuildFile; fileRef = 37DF895B305369CD00E054F7 /* MacOSXArt.h */; };
+		37EB81792F6641900013C513 /* libdobby.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 37EB81782F6641900013C513 /* libdobby.a */; };
+		37F1DE5E2F5B9BF70007D5F1 /* dobby.h in Headers */ = {isa = PBXBuildFile; fileRef = 37F1DE5B2F5B9BF70007D5F1 /* dobby.h */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		37EB817B2F6641E60013C513 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+				37052FD03036327000A9C2D4 /* MacOSXArt.bundle in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		3705DC4A3033B7470076AC1F /* MacOSXArt.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MacOSXArt.bundle; sourceTree = "<group>"; };
+		37117728307ADD12008A832E /* iLifeMediaBrowser.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iLifeMediaBrowser.framework; path = ../../../../System/Library/PrivateFrameworks/iLifeMediaBrowser.framework; sourceTree = "<group>"; };
+		37230E2D304F4A07001C1F76 /* libMacOSXArt.dylib.options */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = libMacOSXArt.dylib.options; sourceTree = "<group>"; };
+		37B2E0572F4274D600832C6D /* ZKSwizzle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZKSwizzle.h; sourceTree = "<group>"; };
+		37B2E0582F4274D600832C6D /* ZKSwizzle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZKSwizzle.m; sourceTree = "<group>"; };
+		37B2E05A2F4274D600832C6D /* MacOSXArt.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MacOSXArt.m; sourceTree = "<group>"; };
+		37DF895B305369CD00E054F7 /* MacOSXArt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MacOSXArt.h; sourceTree = "<group>"; };
+		37EB81782F6641900013C513 /* libdobby.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdobby.a; sourceTree = "<group>"; };
+		37F1DE5B2F5B9BF70007D5F1 /* dobby.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = dobby.h; sourceTree = "<group>"; };
+		37F1DE602F5B9C010007D5F1 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		9D44A5B92ECF5D1400F12F23 /* libMacOSXArt-public.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = "libMacOSXArt-public.dylib"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		9D44A5B72ECF5D1400F12F23 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37CCDB5B30674AA900CF53A9 /* libc++.tbd in Frameworks */,
+				37EB81792F6641900013C513 /* libdobby.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		37B2E0592F4274D600832C6D /* ZKSwizzle */ = {
+			isa = PBXGroup;
+			children = (
+				37B2E0572F4274D600832C6D /* ZKSwizzle.h */,
+				37B2E0582F4274D600832C6D /* ZKSwizzle.m */,
+			);
+			path = ZKSwizzle;
+			sourceTree = "<group>";
+		};
+		37B2E05B2F4274D600832C6D /* MacOSXArt */ = {
+			isa = PBXGroup;
+			children = (
+				37B2E05A2F4274D600832C6D /* MacOSXArt.m */,
+				37DF895B305369CD00E054F7 /* MacOSXArt.h */,
+				3705DC4A3033B7470076AC1F /* MacOSXArt.bundle */,
+				37230E2D304F4A07001C1F76 /* libMacOSXArt.dylib.options */,
+			);
+			path = MacOSXArt;
+			sourceTree = "<group>";
+		};
+		37F1DE5F2F5B9C010007D5F1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				37117728307ADD12008A832E /* iLifeMediaBrowser.framework */,
+				37F1DE602F5B9C010007D5F1 /* libc++.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9D44A5B02ECF5D1400F12F23 = {
+			isa = PBXGroup;
+			children = (
+				37F1DE5F2F5B9C010007D5F1 /* Frameworks */,
+				37B2E05B2F4274D600832C6D /* MacOSXArt */,
+				37B2E0592F4274D600832C6D /* ZKSwizzle */,
+				37F1DE5B2F5B9BF70007D5F1 /* dobby.h */,
+				37EB81782F6641900013C513 /* libdobby.a */,
+				9D44A5BA2ECF5D1400F12F23 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		9D44A5BA2ECF5D1400F12F23 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9D44A5B92ECF5D1400F12F23 /* libMacOSXArt-public.dylib */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		9D44A5B52ECF5D1400F12F23 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37B2E05C2F4274D600832C6D /* ZKSwizzle.h in Headers */,
+				37F1DE5E2F5B9BF70007D5F1 /* dobby.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		9D44A5B82ECF5D1400F12F23 /* MacOSXArt-public */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9D44A5BD2ECF5D1400F12F23 /* Build configuration list for PBXNativeTarget "MacOSXArt-public" */;
+			buildPhases = (
+				9D44A5B52ECF5D1400F12F23 /* Headers */,
+				9D44A5B62ECF5D1400F12F23 /* Sources */,
+				9D44A5B72ECF5D1400F12F23 /* Frameworks */,
+				37EB817B2F6641E60013C513 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "MacOSXArt-public";
+			packageProductDependencies = (
+			);
+			productName = BrokenGlass;
+			productReference = 9D44A5B92ECF5D1400F12F23 /* libMacOSXArt-public.dylib */;
+			productType = "com.apple.product-type.library.dynamic";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9D44A5B12ECF5D1400F12F23 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1640;
+				TargetAttributes = {
+					9D44A5B82ECF5D1400F12F23 = {
+						CreatedOnToolsVersion = 14.0;
+					};
+				};
+			};
+			buildConfigurationList = 9D44A5B42ECF5D1400F12F23 /* Build configuration list for PBXProject "MacOSXArt-public" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 9D44A5B02ECF5D1400F12F23;
+			minimizedProjectReferenceProxies = 1;
+			productRefGroup = 9D44A5BA2ECF5D1400F12F23 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				9D44A5B82ECF5D1400F12F23 /* MacOSXArt-public */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		9D44A5B62ECF5D1400F12F23 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37B2E05D2F4274D600832C6D /* ZKSwizzle.m in Sources */,
+				37B2E05E2F4274D600832C6D /* MacOSXArt.m in Sources */,
+				37DF895C305369CD00E054F7 /* MacOSXArt.h in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		9D44A5BC2ECF5D1400F12F23 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = (
+					x86_64,
+					arm64e,
+				);
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				WARNING_CFLAGS = "-Wno-nullability-completeness";
+			};
+			name = Release;
+		};
+		9D44A5BF2ECF5D1400F12F23 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				EXECUTABLE_PREFIX = lib;
+				LIBRARY_SEARCH_PATHS = (
+					"${inherited}",
+					"${PROJECT_DIR}",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SYSTEM_FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SYSTEM_LIBRARY_DIR)/PrivateFrameworks",
+				);
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		9D44A5B42ECF5D1400F12F23 /* Build configuration list for PBXProject "MacOSXArt-public" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9D44A5BC2ECF5D1400F12F23 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9D44A5BD2ECF5D1400F12F23 /* Build configuration list for PBXNativeTarget "MacOSXArt-public" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9D44A5BF2ECF5D1400F12F23 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9D44A5B12ECF5D1400F12F23 /* Project object */;
+}
