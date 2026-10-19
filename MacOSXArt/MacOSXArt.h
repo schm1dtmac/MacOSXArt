@@ -6,6 +6,14 @@
 @property (getter=_isSymbolImage,readonly) bool _symbolImage;
 @end
 
+@interface FullScreenButtonCell : NSButtonCell
+-(void)drawBezelWithFrame:(CGRect)arg1 inView:(id)arg2;
+@end
+
+@implementation FullScreenButtonCell : NSButtonCell
+-(void)drawBezelWithFrame:(CGRect)arg1 inView:(id)arg2 {}
+@end
+
 @interface MacOSXArtImage : NSImage
 @end
 @implementation MacOSXArtImage
@@ -21,24 +29,26 @@
 - (NSView*)titlebarView;
 @end
 
-@interface NSWindow ()
--(NSThemeFrame*)_themeFrame;
--(NSView*)_toolbarView;
--(id)titlebarViewController;
-@end
-
 @interface NSMenu ()
 - (bool)_isAppleMenu;
 -(bool)isMainMenu;
 @end
 
+@interface NSMenuItem ()
+-(bool)_isAppleMenuItem;
+@end
+
+@interface NSTableRowView ()
+-(bool)_needsSelectionBlurBackgroundView;
+@end
+
+@interface NSWindow ()
+-(NSThemeFrame*)_themeFrame;
+@end
+
 @interface NSContextMenuImpl : NSResponder
 -(NSMenu*)menu;
 -(NSObject*)selectionMaterialView;
-@end
-
-@interface NSMenuItem ()
--(bool)_isAppleMenuItem;
 @end
 
 @interface NSMenuBarItemView : NSView
@@ -122,9 +132,12 @@ NSAppearance* accessibilityGraphiteDarkAquaAppearance;
 NSAppearance* accessibilityVibrantLightAppearance;
 NSAppearance* accessibilityDarkAppearance;
 NSAppearance* accessibilityDarkGraphiteAppearance;
+NSAppearance* sourceListAppearance;
 NSImage* MenuBar;
+NSImage* MenuSelection;
 NSImage* AppleLogo;
 NSImage* MacOSX;
+NSImage* AquaProgress;
 NSImageView* MacOSXLogo;
 NSImage *cornerImage;
 NSDictionary* TemplateMap;

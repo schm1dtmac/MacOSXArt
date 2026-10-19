@@ -1,5 +1,15 @@
 #import "MacOSXArt.h"
 
+@implementation NSMenuItem (MacOSXArtMenuItem)
+- (NSImage *)appleImage {
+    if (![self _isAppleMenuItem]) {
+        // Call the original getter (now swapped to appleImage)
+        return [self appleImage];
+    }
+    return AppleLogo;
+}
+@end
+
 CTFontRef FontCreateWithFontDescriptorNew(CTFontDescriptorRef _Nonnull descriptor, CGFloat size, const CGAffineTransform * _Nullable matrix) {
     // Read descriptor
     CFDictionaryRef dictionary = CTFontDescriptorCopyAttributes(descriptor);
@@ -46,8 +56,11 @@ __attribute__((constructor)) void InitTweak(void) {
         accessibilityVibrantLightAppearance = [[NSAppearance alloc] initWithAppearanceNamed:@"AccessibilityVibrantLightAppearance" bundle:bundle];
         accessibilityDarkAppearance = [[NSAppearance alloc] initWithAppearanceNamed:@"AccessibilityDarkAppearance" bundle:bundle];
         accessibilityDarkGraphiteAppearance = [[NSAppearance alloc] initWithAppearanceNamed:@"AccessibilityDarkGraphiteAppearance" bundle:bundle];
+        sourceListAppearance = [[NSAppearance alloc] initWithAppearanceNamed:@"SourceListAppearance" bundle:bundle];
         MenuBar = [bundle imageForResource:@"MenuBar"];
+        MenuSelection = [bundle imageForResource:@"MenuSelection"];
         AppleLogo = [bundle imageForResource:@"Apple"];
+        AquaProgress = [bundle imageForResource:@"AquaProgress"];
         CFErrorRef error;
         CTFontManagerRegisterFontsForURL(CFURLCreateWithString(NULL, CFSTR("/private/var/ammonia/core/tweaks/MacOSXArt.bundle/Contents/Resources/LucidaGrandeUI.ttf"), NULL), kCTFontManagerScopeProcess, &error);
         CTFontManagerRegisterFontsForURL(CFURLCreateWithString(NULL, CFSTR("/private/var/ammonia/core/tweaks/MacOSXArt.bundle/Contents/Resources/LucidaGrandeUI-Bold.ttf"), NULL), kCTFontManagerScopeProcess, &error);
@@ -139,20 +152,15 @@ __attribute__((constructor)) void InitTweak(void) {
             @"rectangle.connected.to.line.below": SafeLoadBundleTemplateImage(@"ToolbarConnectTemplate", bundle),
             @"airdrop": SafeLoadBundleTemplateImage(@"AirDropTemplate", bundle),
         };
-        PrefsIconMap = [NSBundle.mainBundle.bundleIdentifier isEqualToString:@"com.apple.Terminal"] ? @{
-            @"gearshape": SafeLoadBundleImage(@"Startup", bundle),
-            @"document.badge.gearshape": SafeLoadBundleImage(@"WindowSettings", bundle),
-            @"rectangle.3.group": SafeLoadBundleImage(@"WindowGroups", bundle),
-            @"globe": SafeLoadBundleImage(@"Encodings", bundle),
-        } : @{
-            @"gearshape": SafeLoadBundleImage(@"General", bundle),
+        PrefsIconMap = @{
+            @"gearshape": [NSBundle.mainBundle.bundleIdentifier isEqualToString:@"com.apple.Terminal"] ? SafeLoadBundleImage(@"Startup", bundle) : SafeLoadBundleImage(@"General", bundle),
             @"slider.horizontal.3": SafeLoadBundleImage(@"General", bundle),
             @"sidebar.left": SafeLoadBundleImage(@"SidebarPrefs", bundle),
             @"sidebar.leading": SafeLoadBundleImage(@"SidebarPrefs", bundle),
-            @"tag": SafeLoadBundleImage(@"PrefToolbarTagsIcon_32", bundle),
+            @"tag": SafeLoadBundleImage(@"ToolbarLabels", bundle),
             @"gearshape.2": SafeLoadBundleImage(@"ToolbarAdvanced", bundle),
             @"wrench.and.screwdriver": SafeLoadBundleImage(@"ToolbarCustomizeIcon", bundle),
-            @"at": SafeLoadBundleImage(@"Accounts", bundle),
+            @"at": [NSBundle.mainBundle.bundleIdentifier isEqualToString:@"com.apple.mail"] ? SafeLoadBundleImage(@"AccountPreferences", bundle) : SafeLoadBundleImage(@"Accounts", bundle),
             @"folder": SafeLoadBundleImage(@"GenericFolderIcon", bundle),
             @"bell": SafeLoadBundleImage(@"Actions", bundle),
             @"info.circle": SafeLoadBundleImage(@"ToolbarInfo", bundle),
@@ -163,10 +171,11 @@ __attribute__((constructor)) void InitTweak(void) {
             @"key": SafeLoadBundleImage(@"PasswordsPreferences", bundle),
             @"hand.raised": SafeLoadBundleImage(@"UserIcon", bundle),
             @"rectangle.and.pencil.and.ellipsis": SafeLoadBundleImage(@"AutoFillPreferences", bundle),
+            @"rectangle.3.group": SafeLoadBundleImage(@"WindowGroups", bundle),
             @"magnifyingglass": SafeLoadBundleImage(@"MagnifyingGlassIcon", bundle),
-            @"globe": SafeLoadBundleImage(@"BookmarkIcon", bundle),
+            @"globe": [NSBundle.mainBundle.bundleIdentifier isEqualToString:@"com.apple.Terminal"] ? SafeLoadBundleImage(@"Encodings", bundle) : SafeLoadBundleImage(@"BookmarkIcon", bundle),
             @"person": SafeLoadBundleImage(@"VCard", bundle),
-            @"person.crop.square.filled.and.at.rectangle": SafeLoadBundleImage(@"VCard", bundle),
+            @"person.crop.square.filled.and.at.rectangle": SafeLoadBundleImage(@"ABVCardPreferencesModule", bundle),
             @"flag.and.flag.filled.crossed": SafeLoadBundleImage(@"BugIcon_NonFinalArt", bundle),
             @"play.circle": SafeLoadBundleImage(@"PlaybackPrefs", bundle),
             @"xmark.bin": SafeLoadBundleImage(@"junkmail", bundle),
@@ -178,13 +187,12 @@ __attribute__((constructor)) void InitTweak(void) {
             @"envelope.arrow.triangle.branch": SafeLoadBundleImage(@"MailSorter", bundle),
             @"envelope.and.arrow.trianglehead.branch": SafeLoadBundleImage(@"MailSorter", bundle),
             @"square.and.at.rectangle": SafeLoadBundleImage(@"ABTemplatePreferencesModule", bundle),
-            @"person.crop.square.fill.and.at.rectangle": SafeLoadBundleImage(@"ABVCardPreferencesModule", bundle),
             @"icloud": SafeLoadBundleImage(@"iCloud", bundle),
             @"book": SafeLoadBundleImage(@"iBooksAppIcon", bundle),
             @"photo.on.rectangle": SafeLoadBundleImage(@"TB_PrefsImages", bundle),
             @"text.document": SafeLoadBundleImage(@"TB_PrefsPDF", bundle),
             @"cross.circle": SafeLoadBundleImage(@"FirstAid", bundle),
-            @"document.badge.gearshape": SafeLoadBundleImage(@"Profiles", bundle),
+            @"document.badge.gearshape": [NSBundle.mainBundle.bundleIdentifier isEqualToString:@"com.apple.Terminal"] ? SafeLoadBundleImage(@"WindowSettings", bundle) : SafeLoadBundleImage(@"Profiles", bundle),
             @"display": SafeLoadBundleImage(@"Devices", bundle),
             @"camera.filters": SafeLoadBundleImage(@"Filters", bundle),
             @"calculator": SafeLoadBundleImage(@"Calculator", bundle),
@@ -199,7 +207,7 @@ __attribute__((constructor)) void InitTweak(void) {
             @"hand.raised.slash": SafeLoadBundleImage(@"UserIcon", bundle),
             @"printer": SafeLoadBundleImage(@"Printer", bundle),
             @"printer.dotmatrix": SafeLoadBundleImage(@"Printer", bundle),
-            @"network": SafeLoadBundleImage(@"Network", bundle),
+            @"network": SafeLoadBundleImage(@"GenericNetworkIcon", bundle),
         };
         FinderIconMap = @{
             @"appstore": SafeLoadBundleImage(@"ToolbarAppsFolderIcon", bundle),
@@ -247,21 +255,31 @@ __attribute__((constructor)) void InitTweak(void) {
     
     DobbyHook(DobbySymbolResolver("AppKit", "_NSSidebarUsesGoldenMetrics"), AppKitFlagFalse, (void**)&SidebarGoldenMetricsOld);
     
-    if(![[[NSBundle mainBundle] bundleIdentifier] isEqualToString:@"com.apple.Music"]) {
+    if(![[[NSBundle mainBundle] bundleIdentifier] isEqualToString:@"com.apple.Music"]
+       && ![[[NSBundle mainBundle] bundleIdentifier] isEqualToString:@"com.apple.Preview"]) {
         DobbyHook(DobbySymbolResolver("AppKit", "_NSTableViewCanUseGoldenStylesDefaultValueFunction"), AppKitFlagFalse, (void**) &TableViewGoldenStylesOld);
     }
     
     DobbyHook(DobbySymbolResolver("AppKit", "_NSScrollViewUseLegacyScrollingDefaultValueFunction"), AppKitFlagTrue, (void**)&LegacyScrollingOld);
+    
+    // Apple Logo replacement is implemented here as NetNewsWire & Rogue Amoeba software swizzle
+    // NSMenuItem in a way that is incompatible with ZKSwizzle entirely.
+    Method originalMethod = class_getInstanceMethod([NSMenuItem class], @selector(image));
+    Method swizzledMethod = class_getInstanceMethod([NSMenuItem class], @selector(appleImage));
+
+    if (originalMethod && swizzledMethod) {
+        method_exchangeImplementations(originalMethod, swizzledMethod);
+    }
 }
 
 hook(NSMenuBarRepresentation)
 -(id)_rootBackingView {
     id orig = ZKOrig(id);
     NSMutableArray *_backingViews = [self valueForKey:@"_backingViews"];
-    if(![[_backingViews[1] layer] contents])
-        [[_backingViews[1] layer] setContents:MenuBar];
     if(![[_backingViews[0] layer] contents])
         [[_backingViews[0] layer] setContents:MenuBar];
+    if(![[_backingViews[1] layer] contents])
+        [[_backingViews[1] layer] setContents:MenuBar];
         
     return orig;
 }
@@ -286,13 +304,6 @@ hook(NSMenuBarItemView)
 endhook
 
 hook(NSMenuItem)
--(NSImage*)image {
-    if ([(NSMenuItem*)self _isAppleMenuItem]) {
-        return AppleLogo;
-    }
-    return ZKOrig(NSImage*);
-}
-
 -(NSInteger)indentationLevel {
     return MAX(1, ZKOrig(NSInteger));
 }
@@ -327,7 +338,10 @@ hook(NSContextMenuImpl)
     orig.size = [a0 bounds].size;
     orig.origin.x = 0;
     NSVisualEffectView * backing = [[(NSContextMenuImpl*)self selectionMaterialView] valueForKey:@"_backingView"];
-    [backing setValue:@(0) forKey:@"_materialCornerRadius"];
+    NSImageView* selection = [[NSImageView alloc] initWithFrame:[a0 bounds]];
+    [selection setImage:MenuSelection];
+    [selection setImageScaling:NSImageScaleAxesIndependently];
+    [backing addSubview:selection];
     return orig;
 }
 
@@ -501,11 +515,11 @@ hook(NSAppearance)
 }
 
 + (NSAppearance *)_fauxVibrantLightAppearance {
-    return [self _vibrantLightAppearance];
+    return nil;
 }
 
 + (NSAppearance *)_fauxVibrantDarkAppearance {
-    return [self _vibrantDarkAppearance];
+    return nil;
 }
 
 - (bool)_allowsSystemControlTintColors {
@@ -569,12 +583,18 @@ hook(NSAlert)
 }
 endhook
 
+hook(UIScene)
+-(void)setTitle:(id)title {
+    if (![[[NSBundle mainBundle] bundleIdentifier] isEqualToString:@"com.apple.iBooksX"])
+        return ZKOrig(void, title);
+}
+endhook
+
 hook(NSWindow)
 - (id)initWithContentRect:(NSRect)contentRect styleMask:(NSWindowStyleMask)style backing:(NSBackingStoreType)backingStoreType defer:(bool)flag {
     NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
     if ([bundleIdentifier isEqualToString:@"com.apple.finder"] && [[(NSWindow*)self className] containsString:@"BrowserWindow"]) {
-        NSRect newBrowserContentRect = NSMakeRect(contentRect.origin.x, contentRect.origin.y, 770, 383);
-        return ZKOrig(id, newBrowserContentRect, style & ~NSWindowStyleMaskFullSizeContentView, backingStoreType, flag);
+        return ZKOrig(id, NSMakeRect(contentRect.origin.x, contentRect.origin.y, 770, 436), style, backingStoreType, flag);
     }
     if ([bundleIdentifier isEqualToString:@"com.apple.iCal"]
         || [bundleIdentifier isEqualToString:@"com.apple.MobileSMS"]
@@ -589,14 +609,6 @@ hook(NSWindow)
     return;
 }
 
--(id)contentLayoutGuide {
-    NSString *bundleIdentifier = [[NSBundle mainBundle] bundleIdentifier];
-    if ([bundleIdentifier isEqualToString:@"com.apple.finder"] && [[(NSWindow*)self className] containsString:@"BrowserWindow"]) {
-        return nil;
-    }
-    return ZKOrig(id);
-}
-
 -(NSWindowTitleVisibility)titleVisibility {
     if ([[[NSBundle mainBundle] bundleIdentifier] isEqualToString:@"com.apple.Music"]) {
         return ZKOrig(NSWindowTitleVisibility);
@@ -605,17 +617,13 @@ hook(NSWindow)
 }
 
 -(bool)titlebarAppearsTransparent {
-    if ([[[NSBundle mainBundle] bundleIdentifier] isEqualToString:@"com.apple.MobileSMS"]
-        || [[[NSBundle mainBundle] bundleIdentifier] isEqualToString:@"com.apple.AddressBook"]
-        || [[[NSBundle mainBundle] bundleIdentifier] isEqualToString:@"com.apple.AppStore"]
-        || [[[NSBundle mainBundle] bundleIdentifier] isEqualToString:@"com.apple.iBooksX"]
-        || [[[NSBundle mainBundle] bundleIdentifier] isEqualToString:@"com.apple.findmy"]
-        || [[[NSBundle mainBundle] bundleIdentifier] isEqualToString:@"com.apple.reminders"]
-        || [[[NSBundle mainBundle] bundleIdentifier] isEqualToString:@"com.apple.helpviewer"]
-        || [[[NSBundle mainBundle] bundleIdentifier] isEqualToString:@"com.apple.weather"]) {
-        return false;
+    if ([[[NSBundle mainBundle] bundleIdentifier] isEqualToString:@"com.apple.Music"]
+        || [[[NSBundle mainBundle] bundleIdentifier] isEqualToString:@"com.apple.podcasts"]
+        || (([(NSWindow*)self isKindOfClass:[NSPanel class]]) && ![[self className] isEqualToString:@"_NSAlertPanel"])
+        || ![(NSWindow*)self canBecomeKeyWindow]) {
+        return ZKOrig(bool);
     }
-    return ZKOrig(bool);
+    return false;
 }
 
 - (NSTitlebarSeparatorStyle)titlebarSeparatorStyle {
@@ -682,7 +690,7 @@ hook(NSToolbarItem)
     return nil;
 }
 - (id)initWithItemIdentifier:(id)identifier {
-    return ([[[NSBundle mainBundle] bundleIdentifier] isEqualToString:@"com.apple.Mail"] && [identifier isEqualToString:@"toggleMessageListFilter:"]) ? nil : ZKOrig(id, identifier);
+    return [identifier isEqualToString:@"toggleMessageListFilter:"] ? nil : ZKOrig(id, identifier);
 }
 endhook
 
@@ -806,17 +814,21 @@ hook(UNNotificationSound)
         return ZKOrig(id, a0, a1, a2, @"Tri-Tone");
     return ZKOrig(id, a0, a1, a2, a3);
 }
-
 endhook
 
 hook(NSTableView)
+- (id)_sourceListGroupCellAttributedStringForString:(NSString*)string withDefaultAttributes:(id)attributes highlighted:(_Bool)highlighted {
+    return ZKOrig(id, string, attributes, highlighted);
+}
+- (id)_sourceListWithBlurGroupCellAttributedStringForString:(NSString*)string withDefaultAttributes:(id)attributes highlighted:(_Bool)highlighted {
+    return [self _sourceListGroupCellAttributedStringForString: [string uppercaseString] withDefaultAttributes:attributes highlighted:highlighted];
+}
 - (NSSize)intercellSpacing {
     NSSize orig = ZKOrig(NSSize);
     if (orig.width == 17 && orig.height == 0)
         return NSMakeSize(3,2);
     return orig;
 }
-
 - (CGFloat)rowHeight {
     if ([[[NSBundle mainBundle] bundleIdentifier] isEqualToString:@"com.apple.ActivityMonitor"])
         return 17.0;
@@ -830,6 +842,36 @@ hook(NSTableView)
         default:
             return ZKOrig(CGFloat);
     }
+}
+endhook
+
+hook(NSOutlineView)
+- (bool)_canUseUpdatedIdentation {
+    return false;
+}
+
+- (double)_legacyIndentationForLevel:(long long)level isSourceListGroupRow:(_Bool)row {
+    return level == 0 ? 10.0 : 14.0 * level;
+}
+endhook
+
+hook(NSTableViewStyleData)
+-(double)rowContentInset {
+    if ([[[NSBundle mainBundle] bundleIdentifier] isEqualToString:@"com.apple.Preview"]) {
+        double orig = ZKOrig(double);
+        return orig == 10 ? orig : 0.0;
+    }
+    return 0.0;
+}
+endhook
+
+hook(NSTableRowView)
+-(NSBackgroundStyle)interiorBackgroundStyle {
+    return ([(NSTableRowView*)self isSelected] && [(NSTableRowView*)self _needsSelectionBlurBackgroundView]) ? NSBackgroundStyleEmphasized : ZKOrig(NSBackgroundStyle);
+}
+
+-(id)_preferredAppearance {
+    return ([(NSTableRowView*)self isSelected] && [(NSTableRowView*)self _needsSelectionBlurBackgroundView]) ? sourceListAppearance : ZKOrig(id);
 }
 endhook
 
@@ -849,6 +891,15 @@ hook(NSThemeFrame)
     return [[(NSView*)self identifier] isEqual:@"AquaMacOSXAbout"] ? true : ZKOrig(bool);
 }
 
+- (id)newFullScreenButton {
+    NSButton* orig = ZKOrig(id);
+    NSButton* new = [[NSButton alloc] initWithFrame:[orig frame]];
+    [new setCell:[[FullScreenButtonCell alloc] initImageCell:[orig image]]];
+    [new setBezelStyle:NSBezelStyleToolbar];
+    [new setAction:[orig action]];
+    return new;
+}
+
 - (CGPoint)_closeButtonOrigin {
     CGPoint origin = ZKOrig(CGPoint);
     if ([[[NSBundle mainBundle] bundleIdentifier] isEqualToString:@"com.apple.Music"])
@@ -865,10 +916,6 @@ hook(NSThemeFrame)
 
 +(double)_windowTitlebarTitleMinHeight:(unsigned long long)a0 {
     return MIN(ZKOrig(double, a0), 22.0);
-}
-
-+(double)_windowTitlebarTitleMinHeight:(unsigned long long)a0 hasSolariumAppearance:(bool)flag {
-    return MIN(ZKOrig(double, a0, flag), 22.0);
 }
 
 -(double)_minYTitlebarButtonsOffset {
@@ -900,11 +947,11 @@ hook(NSThemeFrame)
     }
 }
 -(double)_toolbarLeadingSpace {
-    return ZKOrig(double) + 2.5;
+    return ZKOrig(double) + 3;
 }
 
 -(double)_toolbarTrailingSpace {
-    return ZKOrig(double) + 2.5;
+    return ZKOrig(double) + 3;
 }
 endhook
 
@@ -919,27 +966,17 @@ endhook
 
 hook(NSControl)
 - (void)setControlSize:(NSControlSize)controlSize {
-    return controlSize == NSControlSizeLarge ? ZKOrig(void, NSControlSizeRegular) : ZKOrig(void, controlSize);
+    return ZKOrig(void, controlSize % 3);
 }
 
 - (NSControlSize)controlSize {
-    NSControlSize controlSize = ZKOrig(NSControlSize);
-    return controlSize == NSControlSizeLarge ? NSControlSizeRegular : controlSize;
+    return ZKOrig(NSControlSize) % 3;
 }
 endhook
 
 hook(NSButtonCell)
 - (NSControlSize)controlSize {
-    NSControlSize controlSize = ZKOrig(NSControlSize);
-    return controlSize == NSControlSizeLarge ? NSControlSizeRegular : controlSize;
-}
-
--(void)_setState:(long long)arg1 animated:(char)arg2 {
-    return ZKOrig(void, arg1, true);
-}
-
--(void)_setHighlighted:(char)arg1 animated:(char)arg2 {
-    return ZKOrig(void, arg1, true);
+    return ZKOrig(NSControlSize) % 3;
 }
 endhook
 
@@ -1035,6 +1072,36 @@ hook(TBrowserContentViewController)
 }
 endhook
 
+hook(TImageView)
+-(void)setImage:(NSImage*)image {
+    if([image size].height <= 64)
+        [image setTemplate:YES];
+    return ZKOrig(void, image);
+}
+-(void)setFrame:(CGRect)rect {
+    if ([[(NSImageView*)self superview] frame].size.height == 24.0)
+        return ZKOrig(void, ((CGRect){rect.origin, NSMakeSize(18, 18)}));
+    else if ([[(NSImageView*)self superview] frame].size.height == 20.0)
+        return ZKOrig(void, ((CGRect){NSMakePoint(rect.origin.x, 2), rect.size}));
+    return ZKOrig(void, rect);
+}
+endhook
+
+hook(FI_TImageView)
+-(void)setImage:(NSImage*)image {
+    if([image size].height <= 64)
+        [image setTemplate:YES];
+    return ZKOrig(void, image);
+}
+-(void)setFrame:(CGRect)rect {
+    if ([[(NSImageView*)self superview] frame].size.height == 24.0)
+        return ZKOrig(void, ((CGRect){rect.origin, NSMakeSize(18, 18)}));
+    else if ([[(NSImageView*)self superview] frame].size.height == 20.0)
+        return ZKOrig(void, ((CGRect){NSMakePoint(rect.origin.x, 2), rect.size}));
+    return ZKOrig(void, rect);
+}
+endhook
+
 hook(TSidebarViewController)
 - (void)outlineView:(id)view draggingEndedAt:(CGPoint)at operation:(unsigned long long)operation {
     if([(TSidebarViewController*)self dragShouldRemove])
@@ -1043,7 +1110,24 @@ hook(TSidebarViewController)
 }
 endhook
 
+hook(FI_TSidebarViewController)
+- (void)outlineView:(id)view draggingEndedAt:(CGPoint)at operation:(unsigned long long)operation {
+    if([(TSidebarViewController*)self dragShouldRemove])
+        NSShowAnimationEffect(NSAnimationEffectPoof, [NSEvent mouseLocation], NSZeroSize, nil, nil, nil);
+    ZKOrig(void, view, at, operation);
+}
+endhook
+
 hook(TTextField)
+- (void)setFrameOrigin:(NSPoint)origin {
+    if ([[self valueForKey:@"identifier"] isEqualToString:@"xSidebarHeader"]) {
+        origin.x = 6.0;
+    }
+    return ZKOrig(void, origin);
+}
+endhook
+
+hook(FI_TTextField)
 - (void)setFrameOrigin:(NSPoint)origin {
     if ([[self valueForKey:@"identifier"] isEqualToString:@"xSidebarHeader"]) {
         origin.x = 6.0;
@@ -1129,11 +1213,17 @@ hook(_TtC6Safari24CompletionListBannerData)
 endhook
 
 hook(_TtCC6Safari32CompletionListCollectionViewItem4View)
--(void)setFrame:(CGRect)frame {
+- (void)setFrame:(CGRect)frame {
     frame.origin.x -= 16;
     frame.size.width += 32;
     frame.size.height = 24;
     return ZKOrig(void, frame);
+}
+endhook
+
+hook(_TtCC6Safari38CompletionListCollectionViewController22InterItemSeparatorView)
+- (id)initWithFrame:(CGRect)frame {
+    return nil;
 }
 endhook
 
@@ -1219,6 +1309,16 @@ hook(ToolbarDownloadsButton)
     frame.origin.y = frame.origin.y - 5;
     progressBar.frame = frame;
 }
+-(void)setImage:(NSImage*)orig {
+    if (![orig _isSymbolImage]) {
+        return ZKOrig(void, orig);
+    }
+    
+    NSString* identifier = [[[[orig representations] firstObject] valueForKey:@"_vectorGlyph"] valueForKey:@"_name"];
+    
+    MacOSXArtTemplateImage* image = TemplateMap[identifier];
+    return (image && image != (id)[NSNull null]) ? ZKOrig(void, image) : ZKOrig(void, orig);
+}
 endhook
 
 hook(ToolbarButtonPlus)
@@ -1245,14 +1345,15 @@ endhook
 hook(UnifiedField)
 - (CGRect)_adjustedProgressBarRectForValue:(double)value {
     CGRect rect = ZKOrig(CGRect, value);
-    rect.size.height = 20.5;
+    CALayer *progressLayer = [self valueForKey:@"_progressFillLayer"];
+    CGRect frame = [[progressLayer superlayer] frame];
+    rect.size.height = 20;
+    [progressLayer setContents:AquaProgress];
+    [[progressLayer superlayer] setFrame:CGRectMake(1.0, 0.5, frame.size.width + 2, 20)];
     return rect;
 }
-- (double)_progressBarDrawingOffset {
-    return -1.5;
-}
 - (id)_progressBarColor {
-    return [[NSColor systemBlueColor] colorWithAlphaComponent:0.5];
+    return [NSColor clearColor];
 }
 - (double)_progressBarCornerRadius {
     return 0.0;
@@ -1292,11 +1393,11 @@ hook(UnifiedField)
 }
 -(void)setFrame:(CGRect)frame {
     frame.size.height = 22.0;
-    frame.origin.y += 0.5;
+    frame.origin.y = 1/[[NSScreen mainScreen] backingScaleFactor];
     return ZKOrig(void,frame);
 }
 -(void)setBezelStyle:(NSTextFieldBezelStyle)style {
-    return ZKOrig(void, NSBezelStyleTexturedRounded);
+    return ZKOrig(void, NSTextFieldSquareBezel);
 }
 endhook
 
@@ -1308,11 +1409,11 @@ hook(UnifiedFieldBezelView)
     return;
 }
 -(void)setBezelStyle:(NSTextFieldBezelStyle)style {
-    return ZKOrig(void, NSBezelStyleTexturedRounded);
+    return ZKOrig(void, NSTextFieldSquareBezel);
 }
 -(void)setFrame:(CGRect)frame {
     frame.size.height = 22.0;
-    frame.origin.y += 0.5;
+    frame.origin.y = 1/[[NSScreen mainScreen] backingScaleFactor];
     return ZKOrig(void,frame);
 }
 - (void)drawRect:(NSRect)rect {
@@ -1379,6 +1480,19 @@ hook(SPImageView)
 }
 endhook
 //end ASP
+
+//dock
+hook(DockBar)
+-(float)tileSize {
+    return ZKOrig(float);
+}
+
+-(float)distanceBottom {
+    //return [self tileSize] < 64 ? [self tileSize]*[self tileSize] * 8/(64*64) : [self tileSize] * 8/64; // Mavericks
+    return [self tileSize] < 64 ? [self tileSize]*[self tileSize] * 13/(64*64) : [self tileSize] * 13/64; // Lion
+}
+endhook
+//end dock
 
 //begin ichat
 hook(CKUIBehaviorMac)
