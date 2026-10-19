@@ -1,2 +1,2 @@
 # MacOSXArt
-An ammonia tweak for Mac OS X Sequoia to load custom artwork based on Mac OS X Lion-Mavericks assets.
+An ammonia tweak for Mac OS X Sequoia to load custom artwork based on Mac OS X Lion assets.
