@@ -3,7 +3,7 @@
 #import "dobby.h"
 
 @interface NSImage ()
-@property (getter=_isSymbolImage,readonly) bool _symbolImage;
+@property (getter=_isSymbolImage,readonly) BOOL _symbolImage;
 @end
 
 @interface FullScreenButtonCell : NSButtonCell
@@ -30,16 +30,16 @@
 @end
 
 @interface NSMenu ()
-- (bool)_isAppleMenu;
--(bool)isMainMenu;
+- (BOOL)_isAppleMenu;
+-(BOOL)isMainMenu;
 @end
 
 @interface NSMenuItem ()
--(bool)_isAppleMenuItem;
+-(BOOL)_isAppleMenuItem;
 @end
 
 @interface NSTableRowView ()
--(bool)_needsSelectionBlurBackgroundView;
+-(BOOL)_needsSelectionBlurBackgroundView;
 @end
 
 @interface NSWindow ()
@@ -52,7 +52,7 @@
 @end
 
 @interface NSMenuBarItemView : NSView
--(bool)_isAppleMenu;
+-(BOOL)_isAppleMenu;
 @end
 
 @interface NSPopupMenuWindow : NSWindow
@@ -62,8 +62,8 @@
 @class NSCompositeAppearance;
 
 @interface NSAppearance ()
-+ (NSCompositeAppearance *)_aquaAppearanceWithAccessibility:(bool)accessibility;
-+ (NSCompositeAppearance *)_darkAquaAppearanceWithAccessibility:(bool)accessibility;
++ (NSCompositeAppearance *)_aquaAppearanceWithAccessibility:(BOOL)accessibility;
++ (NSCompositeAppearance *)_darkAquaAppearanceWithAccessibility:(BOOL)accessibility;
 @end
 
 @interface NSCompositeAppearance : NSAppearance
@@ -75,7 +75,7 @@
 @interface NSBuiltinAppearance : NSAppearance
 - (id)_bundleResourceName;
 - (id)_catalystName;
-- (bool)_isBuiltinAppearance;
+- (BOOL)_isBuiltinAppearance;
 - (id)initWithBundleResourceName:(NSString *)resourceName publicName:(NSString *)publicName catalystName:(NSString *)catalystName;
 @end
 
@@ -111,12 +111,13 @@
 @end
 
 @interface TSidebarViewController : NSViewController
-- (bool)dragShouldRemove;
+- (BOOL)dragShouldRemove;
 @end
 
-extern bool NSColorControlAccentIsGraphite(void);
+extern BOOL NSColorControlAccentIsGraphite(void);
 
 NSBundle* bundle;
+NSString* bundleIdentifier;
 NSAppearance* aqua;
 NSAppearance* darkAqua;
 NSAppearance* graphiteAqua;
@@ -145,15 +146,15 @@ NSDictionary* PrefsIconMap;
 NSDictionary* FinderIconMap;
 
 CTFontRef (*_FontCreateWithFontDescriptorOld)(CTFontDescriptorRef _Nonnull descriptor, CGFloat size, const CGAffineTransform * _Nullable matrix);
-bool (*BoxOld)(void);
-bool (*CellOld)(void);
-bool (*ControlOld)(void);
-bool (*CompatWidgetOld)(void);
-bool (*SelectionRolloverOld)(void);
-bool (*ToolbarMetricsOld)(void);
-bool (*SidebarGoldenMetricsOld)(void);
-bool (*TableViewGoldenStylesOld)(void);
-bool (*LegacyScrollingOld)(void);
+BOOL (*BoxOld)(void);
+BOOL (*CellOld)(void);
+BOOL (*ControlOld)(void);
+BOOL (*CompatWidgetOld)(void);
+BOOL (*SelectionRolloverOld)(void);
+BOOL (*ToolbarMetricsOld)(void);
+BOOL (*SidebarGoldenMetricsOld)(void);
+BOOL (*TableViewGoldenStylesOld)(void);
+BOOL (*LegacyScrollingOld)(void);
 
 id SafeLoadBundleImage(NSString* imageName, NSBundle* bundle) {
     NSImage* image = [bundle imageForResource:imageName];

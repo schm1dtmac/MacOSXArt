@@ -33,7 +33,6 @@
 /* Begin PBXFileReference section */
 		3705DC4A3033B7470076AC1F /* MacOSXArt.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MacOSXArt.bundle; sourceTree = "<group>"; };
 		37117728307ADD12008A832E /* iLifeMediaBrowser.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iLifeMediaBrowser.framework; path = ../../../../System/Library/PrivateFrameworks/iLifeMediaBrowser.framework; sourceTree = "<group>"; };
-		37230E2D304F4A07001C1F76 /* libMacOSXArt.dylib.options */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = libMacOSXArt.dylib.options; sourceTree = "<group>"; };
 		37B2E0572F4274D600832C6D /* ZKSwizzle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZKSwizzle.h; sourceTree = "<group>"; };
 		37B2E0582F4274D600832C6D /* ZKSwizzle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZKSwizzle.m; sourceTree = "<group>"; };
 		37B2E05A2F4274D600832C6D /* MacOSXArt.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MacOSXArt.m; sourceTree = "<group>"; };
@@ -72,7 +71,6 @@
 				37B2E05A2F4274D600832C6D /* MacOSXArt.m */,
 				37DF895B305369CD00E054F7 /* MacOSXArt.h */,
 				3705DC4A3033B7470076AC1F /* MacOSXArt.bundle */,
-				37230E2D304F4A07001C1F76 /* libMacOSXArt.dylib.options */,
 			);
 			path = MacOSXArt;
 			sourceTree = "<group>";
