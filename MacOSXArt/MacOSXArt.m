@@ -619,7 +619,7 @@ hook(NSWindow)
         || (([(NSWindow*)self isKindOfClass:[NSPanel class]]) && ![[self className] isEqualToString:@"_NSAlertPanel"])) {
         return false;
     }
-    return false;
+    return ZKOrig(BOOL);
 }
 - (NSTitlebarSeparatorStyle)titlebarSeparatorStyle {
     return NSTitlebarSeparatorStyleNone;
